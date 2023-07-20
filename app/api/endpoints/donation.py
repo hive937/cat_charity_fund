@@ -20,12 +20,12 @@ router = APIRouter()
     dependencies=[Depends(current_superuser)],
     response_model_exclude={'close_date', }
 )
-async def get_all_meeting_rooms(
+async def get_all_dontaions(
         session: AsyncSession = Depends(get_async_session),
 ):
     """Только для суперюзеров. Get запрос на получение всех пожертований."""
-    reservations = await donation_crud.get_multi(session)
-    return reservations
+    all_donations = await donation_crud.get_multi(session)
+    return all_donations
 
 
 @router.post(

@@ -1,1 +1,8 @@
-Generic single-database configuration with an async dbapi.
+5 миграций здесь из учебного проекта по meeting_rooms, так как почему-то без них у меня проект не хотел запускаться :) (Ревьюверу)
+
+Как пользоваться:
+1. Прописываем в виртуальном окружении следующую команду:
+    alembic revision --autogenerate -m "Any message"
+2. Прописываем в виртуальном окружении следующую команду:
+    alembic upgrade head
+3. Радуемся

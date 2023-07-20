@@ -6,6 +6,7 @@ from app.crud.base import ModelType, CRUD_TYPE
 
 
 def close_model(model: ModelType) -> ModelType:
+    """Функция закрытия модели."""
     model.invested_amount = model.full_amount
     model.fully_invested = True
     model.close_date = datetime.utcnow()
@@ -14,16 +15,17 @@ def close_model(model: ModelType) -> ModelType:
 
 async def invest(
         obj_id: int,
-        crud_one: CRUD_TYPE,
-        crud_two: CRUD_TYPE,
+        crud_for_first_obj: CRUD_TYPE,
+        crud_for_second_obj: CRUD_TYPE,
         session: AsyncSession,
 ) -> ModelType:
-    objs_one = await crud_one.get_multi_not_closed(session)
-    obj_two = await crud_two.get(obj_id, session)
+    """Корутина инвестирования"""
+    objs_one = await crud_for_first_obj.get_multi_not_closed(session)
+    obj_two = await crud_for_second_obj.get(obj_id, session)
     sum_obj_two = obj_two.full_amount - obj_two.invested_amount
     remainder = 0
     for id in objs_one:
-        obj_one = await crud_one.get(id, session)
+        obj_one = await crud_for_first_obj.get(id, session)
         remainder = obj_one.full_amount - obj_one.invested_amount
         if remainder > sum_obj_two:
             obj_one.invested_amount = obj_one.invested_amount + sum_obj_two
