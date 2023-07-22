@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.crud.base import ModelType, CRUD_TYPE
+from app.crud.base import CRUD_TYPE, ModelType
 
 
 def close_model(model: ModelType) -> ModelType:
@@ -32,10 +32,9 @@ async def invest(
             obj_two = close_model(obj_two)
             session.add(obj_one)
             break
-        else:
-            sum_obj_two -= remainder
-            obj_one = close_model(obj_one)
-            session.add(obj_one)
+        sum_obj_two -= remainder
+        obj_one = close_model(obj_one)
+        session.add(obj_one)
     if sum_obj_two == 0:
         obj_two = close_model(obj_two)
     elif sum_obj_two > 0 and objs_one:

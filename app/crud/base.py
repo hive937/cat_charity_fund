@@ -1,9 +1,9 @@
 from typing import Generic, List, Optional, Type, TypeVar
 
 from fastapi.encoders import jsonable_encoder
+from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from pydantic import BaseModel
 
 from app.core.db import Base
 from app.models import User

@@ -1,9 +1,9 @@
+from datetime import datetime
 from typing import Optional
 
 from pydantic import Extra, PositiveInt
 
 from .base import CommonBase
-from datetime import datetime
 
 
 class DonationBase(CommonBase):

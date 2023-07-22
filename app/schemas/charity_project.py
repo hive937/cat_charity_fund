@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import Field, validator, PositiveInt
+from pydantic import Field, PositiveInt, validator
 
 from .base import CommonBase
 
